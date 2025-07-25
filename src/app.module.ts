@@ -4,15 +4,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BreedsModule } from './breeds/breeds.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
-      port: 3307,
-      username: 'user_crud',
-      password: 'root',
+      port: 5436,
+      username: 'postgres',
+      password: 'postgres',
       database: 'db_crud',
       synchronize: true,
       autoLoadEntities: true,
