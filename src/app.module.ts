@@ -18,8 +18,17 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
-      synchronize: true,
       autoLoadEntities: true,
+      synchronize: true,
+      ssl: process.env.POSTGRES_SSL === 'true',
+      extra: {
+        ssl:
+          process.env.POSTGRES_SSL === 'true'
+            ? {
+                rejectUnauthorized: false,
+              }
+            : null,
+      },
     }),
     CatsModule,
     BreedsModule,
